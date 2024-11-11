@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 聊天機器人</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="header">
+            <h1>Burny AI客服</h1>
+            <div class="current-time">當前時間：{{ currentTime }}</div>
+            <button class="minimize-button" @click="toggleChat">-</button>
+        </div>
+        <div class="chat-container" v-show="isChatVisible">
+            <div class="messages">
+                <div v-for="(message, index) in messages" :key="index" :class="['message', message.role]">
+                    <p>{{ message.content }}</p>
+                </div>
+            </div>
+            <div class="quick-options">
+                <button class="option">最新消息</button>
+                <button class="option">會員中心</button>
+                <button class="option">常見問題</button>
+            </div>
+            <div class="input-area">ˋ
+                <input v-model="userInput" @keyup.enter="sendMessage" placeholder="輸入您的訊息...">
+                <button @click="sendMessage" :disabled="isWaitingForResponse">發送</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
